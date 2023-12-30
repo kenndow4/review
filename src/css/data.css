@@ -1,0 +1,56 @@
+
+.cont-a{
+    margin-bottom:5px ;
+    border-bottom: solid 1px #ccc;
+    padding: 10px 5px;
+    cursor: pointer;
+    margin: 2px 0px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    
+}
+.cont-a:hover{
+    background: #eee;
+}
+
+h2{
+    font-size: 17px;
+    font-weight: 700;
+    color: #1d1d20;
+    text-transform: capitalize;
+
+}
+
+
+
+.cont-a .re-icon{
+    color: #494848;
+    font-size: 15px;
+    width: 10%;
+     display: none; 
+    
+}
+
+.cont-a:hover .re-icon{
+ 
+   display: flex;
+}
+
+.cont-a .re-icon:hover{
+    color: #332fa1;
+}
+
+p{
+    font-size: 15px;
+    font-weight: 300;
+    width: 85%;
+}
+
+.p{
+    text-align: center;
+    padding: 20px 0;
+    color: #494848;
+    display: inline-block;
+    
+}
