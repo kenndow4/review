@@ -4,9 +4,12 @@ import { FaEdit } from 'react-icons/fa';
 
 const Revision = () => {
 
-    const {revision, agRevision}=useContext(DataCon);
+    let {revision, chRevision}=useContext(DataCon);
+    
+    
     return ( 
 
+        
         <div className="cont-data">
 
             <h1>In review </h1>
@@ -23,7 +26,7 @@ const Revision = () => {
 
                <p>{data.message}</p>
               </div>
-                <FaEdit className="re-icon" onClick={()=>agRevision(data.id,data.title,data.message)}/>
+                <FaEdit className="re-icon" onClick={()=>chRevision(data.id,data.title,data.message)}/>
                </div>
 
             )

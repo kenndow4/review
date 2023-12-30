@@ -1,12 +1,16 @@
-import { ReactElement, useContext } from "react";
-import { FaEye } from 'react-icons/fa';
+import { ReactElement, useContext,useEffect } from "react";
+import { FaEye,FaEyeSlash } from 'react-icons/fa';
 import { DataCon } from "../data/data";
 import "../css/data.css"
+
+
 
 interface Data{
     id:number,
     title:string,
-    message:string
+    message:string,
+    review:boolean,
+    actualizacion:string
 
 }
 interface DataProps{
@@ -15,9 +19,9 @@ interface DataProps{
 
 const Datas = ({data}:DataProps) :ReactElement=> {
     
-const {agRevision}=useContext(DataCon);
+const {agRevision,revision}=useContext(DataCon);
    
-    
+  
     
     return ( 
 
@@ -26,6 +30,8 @@ const {agRevision}=useContext(DataCon);
            
             {
                 data.map((data)=>{
+                    // console.log(data);
+                    
                     return (
                         <div className="cont-a" key={data.id}>
                       
@@ -33,8 +39,22 @@ const {agRevision}=useContext(DataCon);
                        <h2>{data.title}</h2>
 
                        <p>{data.message}</p>
+                       <p className="actua">Last update {data.actualizacion.toString()}</p>
+                       
+                       
+                       
+                      
                       </div>
+
+                      {
+                        data.review?
+                        <FaEyeSlash className="re-icon" onClick={()=>agRevision(data.id,data.title,data.message)}/>
+                        :
                         <FaEye className="re-icon" onClick={()=>agRevision(data.id,data.title,data.message)}/>
+
+                      }
+                        
+                        
                        </div>
 
                     )

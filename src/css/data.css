@@ -54,3 +54,10 @@ p{
     display: inline-block;
     
 }
+
+.actua{
+    font-size: 12px;
+    color: #6b6b6b;
+    font-weight: 400;
+    margin: 10px 0;
+}

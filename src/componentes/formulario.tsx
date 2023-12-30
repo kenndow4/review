@@ -1,4 +1,4 @@
-import {  useState,useContext, ReactElement } from "react";
+import {  useState,useContext, ReactElement ,useEffect} from "react";
 
 import "../css/formulario.css"
 import Datas from "./datas";
@@ -7,7 +7,9 @@ import { DataCon } from "../data/data";
 interface Dat{
     id:number,
     title:string,
-    message:string
+    message:string,
+    review:boolean,
+    actualizacion:string
 }
 
 const Buscador = ():ReactElement => {
@@ -23,6 +25,12 @@ const Buscador = ():ReactElement => {
     filtros(e.target.value);
     
     }
+
+
+    useEffect(() => {
+        setData(datas);
+      }, [datas]);
+
 
     const filtros=(searchValue:string):void=>{
         let lowerCaseSearch = searchValue.toLowerCase();
@@ -46,7 +54,7 @@ const Buscador = ():ReactElement => {
 
     return ( 
         <>
-        <input type="search" onChange={(e)=>hand(e)} value={value} placeholder="Search here" />
+        <input type="search" onChange={(e)=>hand(e)} value={value} placeholder="Seach here" />
 
         {con?
         <Datas data={data}/>
