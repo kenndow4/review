@@ -6,7 +6,7 @@ const Revision = () => {
 
     let {revision, chRevision}=useContext(DataCon);
     
-    
+   
     return ( 
 
         
@@ -25,6 +25,9 @@ const Revision = () => {
                <h2>{data.title}</h2>
 
                <p>{data.message}</p>
+
+               <iframe   src={data.video} title="YouTube video player"  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" ></iframe>
+
               </div>
                 <FaEdit className="re-icon" onClick={()=>chRevision(data.id,data.title,data.message)}/>
                </div>

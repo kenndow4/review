@@ -1,20 +1,20 @@
 
 .cont-all{
   
-  width: 60%;
-  margin: 5% auto;
+  width: 50%;
+  margin: 2% auto;
 }
 
 .cont{
   width: 100%;
-  background: #fff;
+  background: #191414;
   padding: 10px;
   border-radius: 0px 0px 8px 8px;
   
 }
 
 .h1{
-  color: #fff;
+  color: #000;
   text-align: center;
   margin-top: 5%;
 }

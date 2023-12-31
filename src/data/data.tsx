@@ -1,4 +1,4 @@
-import React ,{ReactNode,useState, useEffect}from "react";
+import React ,{ReactNode,useState}from "react";
 
  let horario:Date= new Date();
  
@@ -8,8 +8,11 @@ interface Data{
     id:number,
     title:string,
     message:string,
+    video:string
     review:boolean,
-    actualizacion:string
+    actualizacion:string,
+    caducacion:number,
+    vCadu:boolean
   
     
 }
@@ -17,7 +20,7 @@ interface Data{
 interface ValueData {
     datas:Data[],
     revision:Data[],
-    agRevision:(id:number,title:string, menssage:string)=>void,
+    agRevision:(id:number,title:string, menssage:string,video:string)=>void,
     chRevision:(id:number,title:string, menssage:string)=>void,
     
 }
@@ -28,9 +31,12 @@ const DataCon = React.createContext<ValueData>({datas:[{
     id:0,
     title:"",
     message:"",
+    video:"",
     review:false,
-    actualizacion:""
-}],revision:[],agRevision(id,title,menssage) {
+    actualizacion:"",
+    caducacion:0,
+    vCadu:false
+}],revision:[],agRevision() {
     
 },
 chRevision(id,title,mensaje){}
@@ -50,42 +56,59 @@ const datass:Data[] = [
         id:1,
         title:"Appreciation",
         message:"Thank you for your hard work on this project.",
+        video:"https://www.youtube.com/embed/mPVOZx9AbvQ?si=O5gMmKC0CgYE31TI",
         review:false,
-        actualizacion:`${new Date().getHours()}/${new Date().getMinutes()}`
+        actualizacion:`${new Date().getHours()}/${new Date().getMinutes()}`,
+        caducacion:new Date().getMinutes() + 1,
+        vCadu:false
     },
     {
         id:2,
         title:"Reminder",
         message:"Don't forget about the meeting at 3 PM tomorrow.",
+        video:"https://www.youtube.com/embed/8qzCUHpLFW8?si=srwtYxJT5iTRKihH",
         review:false,
-        actualizacion:`${new Date().getHours()}/${new Date().getMinutes()}`
+        actualizacion:`${new Date().getHours()}/${new Date().getMinutes()}`,
+        caducacion:new Date().getMinutes() + 1,
+        vCadu:false
     },
     {
         id:3,
         title:"real fake",
         message:"Embrace each day with an open heart and mind. Remember, every challenge is an opportunity for growth. Stay positive!",
+        video:"https://www.youtube.com/embed/dEtmusAb4v0?si=BMsDaqv-AM4hi12U",
         review:false,
-        actualizacion:`${new Date().getHours()}/${new Date().getMinutes()}`
+        actualizacion:`${new Date().getHours()}/${new Date().getMinutes()}`,
+        caducacion:new Date().getMinutes() + 1,
+        vCadu:false
     },
     {
         id:4,
         title:"Greetings",
         message:"Hello! Hope you're having a great day.",
+        video:"https://www.youtube.com/embed/k9FyfRT9Fng?si=QuXY9sfV00h5rYSq",
         review:false,
-        actualizacion:`${new Date().getHours()}/${new Date().getMinutes()}`
+        actualizacion:`${new Date().getHours()}/${new Date().getMinutes()}`,
+        caducacion:new Date().getMinutes() + 1,
+        vCadu:false
     },
 ];
 
 const [revision, setRevision]=useState<Data[]>([]);
 const [datas, setData]=useState<Data[]>(datass);
 const [cuId, setCuId]=useState<number | null>(null);
+const [vCaducion, setVCaducion] = useState<boolean>(false); 
 
-const agRevision=(id:number,title:string, menssage:string)=>{
+const agRevision=(id:number,title:string, menssage:string,video:string)=>{
+
+    console.log(datas);
 
       const newData= datas.map((data)=>{
 
         if(data.id === id){
 
+            
+          
             
             return{
                 ...data,
@@ -99,7 +122,7 @@ const agRevision=(id:number,title:string, menssage:string)=>{
 
        });
 
-     setData(newData);
+    //  setData(newData);
      
 
        const existe:boolean = revision.some(data => data.id === id);
@@ -113,8 +136,11 @@ const agRevision=(id:number,title:string, menssage:string)=>{
         id:id,
         title:title,
         message:menssage,
+        video:video,
         review:true,
-        actualizacion:`${new Date().getHours()}/${new Date().getMinutes()}`
+        actualizacion:`${new Date().getHours()}/${new Date().getMinutes()}`,
+        caducacion:new Date().getMinutes() + 1,
+        vCadu:false
        }
     ]);
 
@@ -124,7 +150,28 @@ const agRevision=(id:number,title:string, menssage:string)=>{
 
        }
 
+       const validacionCadu =newData.map(dat=>{
+        if(new Date().getMinutes() >= dat.caducacion){
+           
+           
+           return{
+              ...dat,
+              vCadu:true
+            }
+           
+        }else{
+         return dat;
+        }
+     
+     });
+    
+      setData(validacionCadu);
+
 };
+
+
+
+
 
 const chRevision=(id:number,title:string,message:string)=>{
    const titlee = prompt("Write the title");
@@ -154,11 +201,27 @@ const chRevision=(id:number,title:string,message:string)=>{
    setRevision(actual)
    // Actualizamos el id actual
    setCuId(id);
-   console.log(revision);
+   
 
+   const newDatas = datas.map(data =>{
+  
+    if(data.id === id){
+        const revData =actual.find(rev=>rev.id === id);
+       
+       
+        return revData? revData : data;
 
+    }else{
+        return data;
+    }
+   
+   
 
+  });
 
+  setData(newDatas)
+
+ 
  
 
 }
@@ -166,28 +229,10 @@ const chRevision=(id:number,title:string,message:string)=>{
 
 // actualizo el estado de datas
 
-useEffect(()=>{
 
 
 
-    const newDatas = datas.map(data =>{
-  
-      if(data.id === cuId){
-          const revData =revision.find(rev=>rev.id === cuId);
-         
-         console.log(revData)
-          return revData? revData : data;
-  
-      }else{
-          return data;
-      }
-     
-     
-  
-    });
 
-    setData(newDatas)
-},[revision,cuId]);
 
 
 

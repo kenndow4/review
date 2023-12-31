@@ -9,19 +9,24 @@ interface Data{
     id:number,
     title:string,
     message:string,
+    video:string,
     review:boolean,
-    actualizacion:string
+    actualizacion:string,
+    caducacion:number,
+    vCadu:boolean
 
 }
 interface DataProps{
     data:Data[]
 }
 
-const Datas = ({data}:DataProps) :ReactElement=> {
+
+
+const Datas = ({data}:DataProps) => {
     
-const {agRevision,revision}=useContext(DataCon);
-   
-  
+const {agRevision}=useContext(DataCon);
+
+    
     
     return ( 
 
@@ -39,18 +44,30 @@ const {agRevision,revision}=useContext(DataCon);
                        <h2>{data.title}</h2>
 
                        <p>{data.message}</p>
-                       <p className="actua">Last update {data.actualizacion.toString()}</p>
                        
                        
-                       
-                      
-                      </div>
+                       {
+                        data.vCadu ?
+                        <p className="caducacion">You should update your list, your last updated were at {data.actualizacion.toString()}</p>
+                        :
+                        <p className="actua">Last update {data.actualizacion.toString()}</p>
 
+                       }
+                       
+                       {/* <iframe   src={data.video} title="YouTube video player"  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" ></iframe> */}
+                       <audio controls>
+        <source src="https://file-examples-com.github.io/uploads/2017/11/file_example_MP3_700KB.mp3" type="audio/mpeg" />
+        
+      </audio>
+
+                      </div>
+                      
+                        
                       {
                         data.review?
-                        <FaEyeSlash className="re-icon" onClick={()=>agRevision(data.id,data.title,data.message)}/>
+                        <FaEyeSlash className="re-icon" onClick={()=>agRevision(data.id,data.title,data.message,data.video)}/>
                         :
-                        <FaEye className="re-icon" onClick={()=>agRevision(data.id,data.title,data.message)}/>
+                        <FaEye className="re-icon" onClick={()=>agRevision(data.id,data.title,data.message,data.video)}/>
 
                       }
                         

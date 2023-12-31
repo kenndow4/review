@@ -8,8 +8,11 @@ interface Dat{
     id:number,
     title:string,
     message:string,
+    video:string,
     review:boolean,
-    actualizacion:string
+    actualizacion:string,
+    caducacion:number,
+    vCadu:boolean
 }
 
 const Buscador = ():ReactElement => {
@@ -19,10 +22,11 @@ const Buscador = ():ReactElement => {
     
     const [value, setValue]=useState<string>("");
     const [data, setData]=useState<Dat[]>(datas);
-    const [con, setCon]=useState<boolean>(true);
+    // const [con, setCon]=useState<boolean>(true);
     const hand=(e:React.ChangeEvent<HTMLInputElement>)=> {
     setValue(e.target.value);
-    filtros(e.target.value);
+    const filteredData = filtros(e.target.value);
+        setData(filteredData);
     
     }
 
@@ -32,7 +36,7 @@ const Buscador = ():ReactElement => {
       }, [datas]);
 
 
-    const filtros=(searchValue:string):void=>{
+    const filtros=(searchValue:string):Dat[]=>{
         let lowerCaseSearch = searchValue.toLowerCase();
         let searchNumber = parseInt(searchValue);
         let filt=datas.filter((data)=>{
@@ -40,15 +44,15 @@ const Buscador = ():ReactElement => {
              data.title.toLowerCase().includes(lowerCaseSearch) ||
               data.id === searchNumber;
         });
-      
+        return filt;
 
-        if(filt.length > 0){
-            setData(filt);
-            setCon(true)
+        // if(filt.length > 0){
+        //     setData(filt);
+        //     setCon(true)
 
-        }else{
-            setCon(false)
-        }
+        // }else{
+        //     setCon(false)
+        // }
     }
 
 
@@ -56,7 +60,7 @@ const Buscador = ():ReactElement => {
         <>
         <input type="search" onChange={(e)=>hand(e)} value={value} placeholder="Seach here" />
 
-        {con?
+        {data.length > 0?
         <Datas data={data}/>
         :
         <p className="p">~ Sorry but your search doesnt exist ~</p>

@@ -2,6 +2,7 @@
   padding: 0;
   margin: 0;
   box-sizing: border-box;
+  color: #fff;
 }
 
 body {
@@ -11,7 +12,9 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background: #000;
+  /* background-color: #FF7F50; */
+  background: linear-gradient(to right, #128b3d, rgb(119, 255, 130));
+  
 }
 
 code {
