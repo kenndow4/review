@@ -1,20 +1,26 @@
 
 .cont-all{
   
-  width: 50%;
+  width: 70%;
   margin: 2% auto;
 }
 
 .cont{
   width: 100%;
   background: #191414;
+  
   padding: 10px;
   border-radius: 0px 0px 8px 8px;
+  display: grid;
+  grid-template-columns: 3% 95%;
+  justify-content: space-between;
   
 }
 
 .h1{
-  color: #000;
-  text-align: center;
+  color: #fff;
+  text-align: left;
   margin-top: 5%;
+  margin-left: 7px;
+  
 }

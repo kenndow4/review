@@ -13,7 +13,9 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   /* background-color: #FF7F50; */
-  background: linear-gradient(to right, #128b3d, rgb(119, 255, 130));
+  /* background: linear-gradient(to right, #128b3d, rgb(119, 255, 130));  */
+  background: #191414;
+  
   
 }
 

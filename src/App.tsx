@@ -8,16 +8,18 @@ import Menu from './componentes/menu';
 function App() {
   return (
     <div className='cont-all'>
-    <h1 className='h1'>CHGALLMWTSX</h1>
-    <Menu/>
+    <h1 className='h1'>CHGALLMWTSXs</h1>
+   
    <div className='cont'>
-
+   <Menu/>
+ <div>
     <Routes>
       <Route path='/' element={<Buscador/>}/>
       <Route path='/review' element={<Revision/>}/>
       
    
     </Routes>
+    </div>
    
     </div>
     </div>

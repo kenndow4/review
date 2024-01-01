@@ -8,6 +8,7 @@ interface Dat{
     id:number,
     title:string,
     message:string,
+    caratula:string
     video:string,
     review:boolean,
     actualizacion:string,
@@ -58,7 +59,7 @@ const Buscador = ():ReactElement => {
 
     return ( 
         <>
-        <input type="search" onChange={(e)=>hand(e)} value={value} placeholder="Seach here" />
+        <input type="search" onChange={(e)=>hand(e)} value={value} placeholder="Seach here, music, artist" />
 
         {data.length > 0?
         <Datas data={data}/>

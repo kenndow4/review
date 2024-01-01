@@ -1,6 +1,6 @@
 import React ,{ReactNode,useState}from "react";
 
- let horario:Date= new Date();
+
  
 
 interface Data{
@@ -8,6 +8,7 @@ interface Data{
     id:number,
     title:string,
     message:string,
+    caratula:string
     video:string
     review:boolean,
     actualizacion:string,
@@ -20,7 +21,7 @@ interface Data{
 interface ValueData {
     datas:Data[],
     revision:Data[],
-    agRevision:(id:number,title:string, menssage:string,video:string)=>void,
+    agRevision:(id:number,title:string, menssage:string,video:string,caratula:string)=>void,
     chRevision:(id:number,title:string, menssage:string)=>void,
     
 }
@@ -35,7 +36,8 @@ const DataCon = React.createContext<ValueData>({datas:[{
     review:false,
     actualizacion:"",
     caducacion:0,
-    vCadu:false
+    vCadu:false,
+    caratula:""
 }],revision:[],agRevision() {
     
 },
@@ -54,9 +56,10 @@ const ContData = ({children}:{children:ReactNode}) => {
 const datass:Data[] = [
     {
         id:1,
-        title:"Appreciation",
-        message:"Thank you for your hard work on this project.",
-        video:"https://www.youtube.com/embed/mPVOZx9AbvQ?si=O5gMmKC0CgYE31TI",
+        title:"Pero Ya No",
+        message:"Written By: Phantom (Producer) · Dez Wright · Freddy “El Syntethyzer” · Bad Bunny · Llanos Gonzalez",
+        video:"yano.mp3",
+        caratula:"https://th.bing.com/th/id/OIP.BwUNIL6yK9lEpCDYr44g6AHaHa?w=161&h=180&c=7&r=0&o=5&dpr=1.3&pid=1.7",
         review:false,
         actualizacion:`${new Date().getHours()}/${new Date().getMinutes()}`,
         caducacion:new Date().getMinutes() + 1,
@@ -64,9 +67,10 @@ const datass:Data[] = [
     },
     {
         id:2,
-        title:"Reminder",
-        message:"Don't forget about the meeting at 3 PM tomorrow.",
-        video:"https://www.youtube.com/embed/8qzCUHpLFW8?si=srwtYxJT5iTRKihH",
+        title:"Yamê - Bécane",
+        message:"A COLORS SHOW",
+        video:"yam.mp3",
+        caratula:"https://th.bing.com/th/id/OIP.1dd_Qyr35rftsFso8Tt9tQAAAA?w=313&h=180&c=7&r=0&o=5&dpr=1.3&pid=1.7",
         review:false,
         actualizacion:`${new Date().getHours()}/${new Date().getMinutes()}`,
         caducacion:new Date().getMinutes() + 1,
@@ -74,9 +78,10 @@ const datass:Data[] = [
     },
     {
         id:3,
-        title:"real fake",
-        message:"Embrace each day with an open heart and mind. Remember, every challenge is an opportunity for growth. Stay positive!",
-        video:"https://www.youtube.com/embed/dEtmusAb4v0?si=BMsDaqv-AM4hi12U",
+        title:"BAD BUNNY - MONACO",
+        message:"album : nadie sabe lo que va a pasar mañana",
+        video:"monaco.mp3",
+        caratula:"https://th.bing.com/th/id/OIF.v0sh6SyOub18J7jA8Hwx7w?w=181&h=181&c=7&r=0&o=5&dpr=1.3&pid=1.7",
         review:false,
         actualizacion:`${new Date().getHours()}/${new Date().getMinutes()}`,
         caducacion:new Date().getMinutes() + 1,
@@ -84,9 +89,10 @@ const datass:Data[] = [
     },
     {
         id:4,
-        title:"Greetings",
-        message:"Hello! Hope you're having a great day.",
-        video:"https://www.youtube.com/embed/k9FyfRT9Fng?si=QuXY9sfV00h5rYSq",
+        title:"Post Malone, Swae Lee - Sunflower",
+        message:"Sunflower (Spider-Man: Into the Spider-Verse) Post Malone",
+        video:"spiderman.mp3",
+        caratula:"https://th.bing.com/th/id/OIP.HNa3cNHnrD27a_laZaopNAHaHa?w=176&h=180&c=7&r=0&o=5&dpr=1.3&pid=1.7",
         review:false,
         actualizacion:`${new Date().getHours()}/${new Date().getMinutes()}`,
         caducacion:new Date().getMinutes() + 1,
@@ -99,7 +105,7 @@ const [datas, setData]=useState<Data[]>(datass);
 const [cuId, setCuId]=useState<number | null>(null);
 const [vCaducion, setVCaducion] = useState<boolean>(false); 
 
-const agRevision=(id:number,title:string, menssage:string,video:string)=>{
+const agRevision=(id:number,title:string, menssage:string,video:string,caratula:string)=>{
 
     console.log(datas);
 
@@ -137,6 +143,7 @@ const agRevision=(id:number,title:string, menssage:string,video:string)=>{
         title:title,
         message:menssage,
         video:video,
+        caratula:caratula,
         review:true,
         actualizacion:`${new Date().getHours()}/${new Date().getMinutes()}`,
         caducacion:new Date().getMinutes() + 1,

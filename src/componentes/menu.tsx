@@ -9,8 +9,8 @@ const Menu = () => {
 
     return ( 
         <nav>
-            <NavLink to="/">List Home</NavLink>
-            <NavLink to="/review">Review ({revision.length})</NavLink>
+            <NavLink to="/">List Songs</NavLink>
+            <NavLink to="/review">Liked ({revision.length})</NavLink>
         </nav>
      );
 }

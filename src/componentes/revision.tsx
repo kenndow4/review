@@ -10,15 +10,24 @@ const Revision = () => {
     return ( 
 
         
+          
+
+
         <div className="cont-data">
 
-            <h1>In review </h1>
+            <h1>You liked them </h1>
            
         {
            revision.length > 0?
 
            revision.map((data)=>{
             return (
+              <div className="cont-all-one">
+                <img src={data.caratula} alt="" />
+
+{/* aqui va todo lo que tiene que ver con audio nombre etc */}
+
+
                 <div className="cont-a" key={data.id}>
               
               <div className="cont-p-r">
@@ -26,10 +35,13 @@ const Revision = () => {
 
                <p>{data.message}</p>
 
-               <iframe   src={data.video} title="YouTube video player"  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" ></iframe>
+              <audio controls>
+                <source src={"/audio/"+data.video}/>
+              </audio>
 
               </div>
                 <FaEdit className="re-icon" onClick={()=>chRevision(data.id,data.title,data.message)}/>
+               </div>
                </div>
 
             )
@@ -39,6 +51,8 @@ const Revision = () => {
            <p className="p">~ There is nothing to review ~</p>
         }
     </div>
+    
+    
 
        
      );
